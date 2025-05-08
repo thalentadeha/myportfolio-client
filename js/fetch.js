@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://localhost:8080/api/v1',
+    fetch('https://myportfolio-server-production.up.railway.app/api/v1',
         {
             method: 'GET',
             mode: 'cors',
