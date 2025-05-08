@@ -227,12 +227,19 @@ function populateCertificates(certificates) {
     certificateContainer.innerHTML = '';
     certificates.forEach(certificate => {
         const colDiv = document.createElement('div');
+
+        let certificatePhoto = "";
+        if(certificate.issuer == "Udemy"){
+            certificatePhoto = "img/udemy-flutter-certificate.jpg";
+        } else if(certificate.issuer == "BNCC"){
+            certificatePhoto = "img/bncc-laravel-certificate.png";
+        }
         colDiv.className = `col-lg-4 col-md-6 certificate-item`;
         colDiv.innerHTML = `
             <div class="certificate-img rounded overflow-hidden">
-                <img class="img-fluid" src="${certificate.url}" alt="${certificate.name}">
+                <img class="img-fluid" src="${certificatePhoto}" alt="${certificate.name}">
                 <div class="certificate-btn">
-                    <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="${certificate.url}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="${certificatePhoto}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                     <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="${certificate.url}" target="_blank" rel="noopener noreferrer"><i class="fa fa-link"></i></a>
                 </div>
             </div>
