@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cvDownload = document.getElementById('cv-download');
             cvDownload.href = data.myDataUrls.cvUrl;
 
-            populateDescription(data.myData.desc);
+            populateDescription(data.myData);
             populateSkills(data.mySkills);
             populateExperience(data.myExperiences);
             populateEducation(data.myEducations);
@@ -59,11 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-function populateDescription(desc) {
+function populateDescription(mydata) {
     const myDesc = document.getElementById('myDesc');
 
     myDesc.innerHTML = `
-        <p class="mb-4 text-center">${desc}</p>
+        <h3>Hi! My name is</h3>
+        <h4>${mydata.fullname}</h4>
+        <p class="mb-4 text-center">${mydata.desc}</p>
     `;
 }
 
