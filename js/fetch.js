@@ -29,13 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // positionElement.textContent = data.myData.position.join(', ');
 
             const cvDownload = document.getElementById('cv-download');
-            cvDownload.href = data.myDataUrls.cvUrl;
+            cvDownload.href = data.myDataUrl.cvUrl;
 
             populateDescription(data.myData);
             populateSkills(data.mySkills);
             populateExperience(data.myExperiences);
             populateEducation(data.myEducations);
-            populateProjects(data.myProjects, data.myDataUrls);
+            populateProjects(data.myProjects, data.myDataUrl);
             populateCertificates(data.myCertificates);
 
             const myLocation = document.getElementById('my-location');
@@ -44,14 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const myPhone = document.getElementById('my-phone');
             myPhone.textContent = data.myData.phone;
 
+            let waNumber = data.myData.phone.replace(/\D/g, "");
+
+            if (waNumber.startsWith("0")) {
+                waNumber = "62" + waNumber.substring(1);
+            }
+
+            myPhone.href = `https://wa.me/${waNumber}`;
+            myPhone.target = "_blank";
+
             const myEmail = document.getElementById('my-email');
             myEmail.textContent = data.myData.email;
 
             const myInstagram = document.getElementById('my-instagram');
-            myInstagram.href = data.myDataUrls.instagram;
+            myInstagram.href = data.myDataUrl.instagram;
 
             const myLinkedin = document.getElementById('my-linkedin');
-            myLinkedin.href = data.myDataUrls.linkedin;
+            myLinkedin.href = data.myDataUrl.linkedin;
         })
         .catch(error => {
             console.error('Fetch error:', error);
@@ -182,7 +191,7 @@ function populateEducation(educations) {
 //     });
 // }
 
-function populateProjects(projects, myDataUrls) {
+function populateProjects(projects, myDataUrl) {
     // populateCategories(categories);
     const portfolioContainer = document.getElementById('portfolio-container');
     portfolioContainer.innerHTML = '';
@@ -205,7 +214,7 @@ function populateProjects(projects, myDataUrls) {
     const otherBtnDiv = document.createElement('div');
     otherBtnDiv.className = 'd-flex justify-content-center align-items-center pt-5';
     otherBtnDiv.innerHTML = `
-        <a id="cv-download" href="${myDataUrls.github}" class="btn btn-info py-3 px-4 me-5">Other Projects</a>
+        <a id="cv-download" href="${myDataUrl.github}" class="btn btn-info py-3 px-4 me-5">Other Projects</a>
     `;
     buttonContainer.appendChild(otherBtnDiv);
     // addFiltering();
