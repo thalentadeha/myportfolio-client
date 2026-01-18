@@ -119,14 +119,21 @@ function populateExperience(experiences) {
         const startYear = startDate.getFullYear();
         const startMonth = startDate.toLocaleString("default", { month: "long" });
 
-        const endDate = new Date(experience.endDate);
-        const endYear = endDate.getFullYear();
-        const endMonth = endDate.toLocaleString("default", { month: "long" });
+        let endText;
+
+        if (!experience.endDate) {
+            endText = "Present";
+        } else {
+            const endDate = new Date(experience.endDate);
+            const endYear = endDate.getFullYear();
+            const endMonth = endDate.toLocaleString("default", { month: "long" });
+            endText = `${endMonth} ${endYear}`;
+        }
 
         experienceDiv.innerHTML = `
             <h5>${experience.position}</h5>
             <hr class="text-info my-2">
-            <p class="text-info mb-1 fw-bold">${startMonth} ${startYear} - ${endMonth} ${endYear}</p>
+            <p class="text-info mb-1 fw-bold">${startMonth} ${startYear} - ${endText}</p>
             <h6 class="mb-0">${experience.company}</h6>
         `;
 
@@ -231,9 +238,9 @@ function populateCertificates(certificates) {
         const colDiv = document.createElement('div');
 
         let certificatePhoto = "";
-        if(certificate.issuer == "Udemy"){
+        if (certificate.issuer == "Udemy") {
             certificatePhoto = "img/udemy-flutter-certificate.jpg";
-        } else if(certificate.issuer == "BNCC"){
+        } else if (certificate.issuer == "BNCC") {
             certificatePhoto = "img/bncc-laravel-certificate.png";
         }
         colDiv.className = `col-lg-4 col-md-6 certificate-item`;
